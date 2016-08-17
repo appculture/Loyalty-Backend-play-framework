@@ -1,0 +1,1 @@
+web: target/universal/stage/bin/Loyalty-Backend-play-framework -Dconfig.file=application.conf
