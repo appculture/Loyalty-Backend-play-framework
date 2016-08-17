@@ -1,16 +1,15 @@
 logs
 target
-/.idea
-/.idea_modules
-/.classpath
-/.project
-/.settings
-/RUNNING_PID
+.idea
+.idea_modules
+.classpath
+.project
+.settings
+RUNNING_PID
 
 # Ignore Play! working directory #
 bin/
 /db
-.eclipse
 /lib/
 /logs/
 /modules
@@ -22,5 +21,10 @@ server.pid
 *.eml
 /dist/
 .cache
+.sbtserver
 
-.sbtserver/*
+# Eclipse
+.eclipse
+
+# OS X
+.DS_STORE

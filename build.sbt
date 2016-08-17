@@ -1,4 +1,4 @@
-name := """LoyaltyBackend"""
+name := """Loyalty-Backend-play-framework"""
 
 version := "1.0-SNAPSHOT"
 
@@ -11,6 +11,3 @@ libraryDependencies ++= Seq(
   cache,
   javaWs
 )
-
-
-fork in run := true
