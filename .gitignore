@@ -7,6 +7,9 @@ target
 .settings
 RUNNING_PID
 
+# Heroku
+.env
+
 # Ignore Play! working directory #
 bin/
 /db
