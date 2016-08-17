@@ -1,1 +1,0 @@
-# Loyalty-Backend-play-framework
