@@ -1,1 +1,1 @@
-web: target/start -Dconfig.file=application.staging.conf
+web: target/universal/stage/bin/play -Dconfig.file=application.staging.conf
