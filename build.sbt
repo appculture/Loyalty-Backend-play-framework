@@ -1,4 +1,4 @@
-name := """LoyaltyBackend"""
+name := """Loyalty-Backend-play-framework”””
 
 version := "1.0-SNAPSHOT"
 
