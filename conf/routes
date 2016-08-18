@@ -12,4 +12,4 @@ GET     /message                    controllers.AsyncController.message
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
-GET     /sampledb                   controllers.SampleDBController.showDBSamplePage
+GET     /sampledb                   controllers.SampleDBController.getName()
