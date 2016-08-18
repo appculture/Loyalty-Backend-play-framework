@@ -1,4 +1,4 @@
-package model;
+package models;
 
 /**
  * Type of transaction represent the way how user earned or spent his points.
