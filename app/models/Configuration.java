@@ -1,4 +1,4 @@
-package model;
+package models;
 
 /**
  * Configuration represent system default configuration.
