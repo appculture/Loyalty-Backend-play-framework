@@ -5,6 +5,7 @@ import play.Logger;
 import play.db.Database;
 import play.mvc.Controller;
 import play.mvc.Result;
+import views.html.getAllTestData;
 import views.html.sampledb;
 
 import javax.inject.Inject;
@@ -22,7 +23,7 @@ public class SampleDBController extends Controller {
         this.db = db;
     }
 
-    public Result showDBSamplePage() {
+    public Result getAllTestData() {
 
 
         List<Test> data = Test.find.all();
@@ -31,7 +32,8 @@ public class SampleDBController extends Controller {
         Logger.debug("db table size:" + data.size());
         //Logger.debug("name of first entry in db:" + firstTest.name);
 
-        return ok(sampledb.render("Database sample page."));
+        //return ok(sampledb.render("Database sample page."));
+        return ok(getAllTestData.render(Test.find.all()));
     }
 
     public Result getName()
