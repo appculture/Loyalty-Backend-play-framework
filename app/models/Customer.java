@@ -1,25 +1,51 @@
 package models;
 
+import com.avaje.ebean.Model;
+import play.data.format.Formats;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * Customer contains all profile information's related to actual client.
  * <p>
  * Created by abozic on 8/18/16.
  */
-public class Customer {
+@Entity
+public class Customer extends Model {
 
+    @Id
+    @GeneratedValue(generator = "uuid")
     private String customerId;
+    @NotNull
     private String fullName;
+    @Column(unique = true)
     private String email;
     private String phoneNumber;
     private double points;
+    @Formats.DateTime(pattern = "dd.MM.yyyy")
     private Date birthDate;
     /**
      * User ID represent external system ID, ID might be filled during import of the data.
      */
     private String userId;
     private Date creationDate;
+
+    public static Finder<String, Customer> find = new Finder<String, Customer>(Customer.class);
+
+    public Customer(String fullName, String email, String phoneNumber) {
+        this.fullName = fullName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
+
+    @Override
+    public void insert() {
+        if (customerId == null) customerId = UUID.randomUUID().toString();
+        super.insert();
+    }
 
     public String getCustomerId() {
         return customerId;
