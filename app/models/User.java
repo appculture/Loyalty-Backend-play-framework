@@ -1,13 +1,31 @@
 package models;
 
+
+import com.avaje.ebean.Model;
+import org.springframework.beans.factory.annotation.Required;
+import play.Logger;
+import play.data.validation.Constraints;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * User of the system.
  * Created by abozic on 8/19/16.
  */
-public class User {
 
+@Entity
+@Table(name = "user", schema = "public")
+public class User extends Model {
+
+    @Column(name = "fullName")
     private String fullName;
+    @Id
+    @Constraints.Required
     private String username;
+    @Constraints.Required
     private String password;
     private UserType type;
 
@@ -42,4 +60,22 @@ public class User {
     public void setType(UserType type) {
         this.type = type;
     }
+
+    public String validate() {
+        Logger.debug("in User\'s validate");
+
+        if (authenticate(username, password) == null) {
+            return "Invalid email or password";
+        }
+        return null;
+    }
+
+    public static Model.Finder<String,User> find = new Model.Finder<>(User.class);
+
+    public static User authenticate(String username, String password) {
+        Logger.debug("in User\'s authenticate");
+        return find.where().eq("username", username)
+                .eq("password", password).findUnique();
+    }
+
 }
