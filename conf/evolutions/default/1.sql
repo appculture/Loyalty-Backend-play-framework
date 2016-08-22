@@ -23,7 +23,7 @@ create table test (
 );
 create sequence test_seq;
 
-create table public.user (
+create table user (
   username                      varchar(255) not null,
   fullname                      varchar(255),
   password                      varchar(255),
@@ -40,5 +40,5 @@ drop table if exists customer;
 drop table if exists test;
 drop sequence if exists test_seq;
 
-drop table if exists public.user;
+drop table if exists user;
 
