@@ -41,7 +41,6 @@ public class LoginController extends Controller {
         } else {
             session().clear();
             session("username", loginForm.get().email);
-            //session("username", "bla");
             return redirect(routes.SampleDBController.getAllTestData());
         }
     }

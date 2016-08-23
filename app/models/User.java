@@ -1,8 +1,7 @@
 package models;
 
-
 import com.avaje.ebean.Model;
-import org.springframework.beans.factory.annotation.Required;
+import org.mindrot.jbcrypt.BCrypt;
 import play.Logger;
 import play.data.validation.Constraints;
 
@@ -73,9 +72,16 @@ public class User extends Model {
     public static Model.Finder<String,User> find = new Model.Finder<>(User.class);
 
     public static User authenticate(String username, String password) {
-        Logger.debug("in User\'s authenticate");
-        return find.where().eq("username", username)
-                .eq("password", password).findUnique();
+
+        User user = User.find.where().eq("username", username).findUnique();
+        String hashedPassword = user == null ? "" : user.password;
+
+        if (user != null && BCrypt.checkpw(password, hashedPassword)) {
+            return user;
+        } else {
+            return null;
+        }
+
     }
 
 }
