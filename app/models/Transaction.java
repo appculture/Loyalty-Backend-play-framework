@@ -1,5 +1,8 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -8,22 +11,28 @@ import java.util.Date;
  * <p>
  * Created by abozic on 8/18/16.
  */
+@Entity
 public class Transaction {
 
-    private String transationId;
+    @Id
+    @GeneratedValue(generator = "uuid")
+    private String transactionId;
+    @Column(columnDefinition = "timestamp default now()")
     private Date date;
     private String description;
     private double points;
     //not in use for a moment
     //private TransactionType type;
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL)
     private Customer customer;
 
-    public String getTransationId() {
-        return transationId;
+    public String getTransactionId() {
+        return transactionId;
     }
 
-    public void setTransationId(String transationId) {
-        this.transationId = transationId;
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
     }
 
     public Date getDate() {

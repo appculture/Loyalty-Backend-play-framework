@@ -32,16 +32,19 @@ public class CustomerController extends Controller {
     }
 
     public Result getCustomer(String customerId) {
-        if (Strings.isNullOrEmpty(customerId)) return badRequest("Customer ID not valid");
-        Logger.info("Requested customerID: " + customerId);
-
-        Customer customer = Customer.find.byId(customerId);
-        if (customer == null) return badRequest("No customer found");
+        Customer customer = getCustomerById(customerId);
+        if (customer == null) return badRequest("Customer not found");
 
         JsonNode result = Json.toJson(customer);
         Logger.info("Customer found: " + result);
-
         return ok(result);
+    }
+
+    private Customer getCustomerById(String customerId) {
+        if (Strings.isNullOrEmpty(customerId)) return null;
+        Logger.info("Requested customerID: " + customerId);
+
+        return Customer.find.byId(customerId);
     }
 
     public Result create() {
