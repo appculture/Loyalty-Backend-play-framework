@@ -21,8 +21,8 @@ public class Transaction {
     private Date date;
     private String description;
     private double points;
-    //not in use for a moment
-    //private TransactionType type;
+    @Enumerated(EnumType.STRING)
+    private TransactionType type;
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     private Customer customer;
@@ -65,5 +65,13 @@ public class Transaction {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public TransactionType getType() {
+        return type;
+    }
+
+    public void setType(TransactionType type) {
+        this.type = type;
     }
 }

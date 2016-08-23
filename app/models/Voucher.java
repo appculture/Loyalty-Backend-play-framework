@@ -1,5 +1,6 @@
 package models;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -7,22 +8,27 @@ import java.util.Date;
  * <p>
  * Created by abozic on 8/18/16.
  */
+@Entity
+@SequenceGenerator(name = "voucher_seq", sequenceName = "voucher_seq")
 public class Voucher {
 
-    private String voucherId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "voucher_seq")
+    private int voucherId;
     private String name;
     private String description;
     private String imageUrl;
     private double points;
     private boolean active;
+    @Column(columnDefinition = "timestamp default now()")
     private Date creationDate;
     private Date expiryDate;
 
-    public String getVoucherId() {
+    public int getVoucherId() {
         return voucherId;
     }
 
-    public void setVoucherId(String voucherId) {
+    public void setVoucherId(int voucherId) {
         this.voucherId = voucherId;
     }
 

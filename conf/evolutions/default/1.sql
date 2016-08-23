@@ -27,7 +27,9 @@ create table transaction (
   date                          timestamp default now(),
   description                   varchar(255),
   points                        float,
+  type                          varchar(8),
   customer_customer_id          varchar(255),
+  constraint ck_transaction_type check (type in ('REDEEM','INVITE','PURCHASE')),
   constraint pk_transaction primary key (transaction_id)
 );
 
@@ -39,6 +41,19 @@ create table public.user (
   constraint ck_user_type check (type in ('CUSTOMER','ADMIN')),
   constraint pk_user primary key (username)
 );
+
+create table voucher (
+  voucher_id                    integer not null,
+  name                          varchar(255),
+  description                   varchar(255),
+  image_url                     varchar(255),
+  points                        float,
+  active                        boolean,
+  creation_date                 timestamp default now(),
+  expiry_date                   timestamp,
+  constraint pk_voucher primary key (voucher_id)
+);
+create sequence voucher_seq;
 
 alter table transaction add constraint fk_transaction_customer_customer_id foreign key (customer_customer_id) references customer (customer_id) on delete restrict on update restrict;
 create index ix_transaction_customer_customer_id on transaction (customer_customer_id);
@@ -56,4 +71,7 @@ drop table if exists test cascade;
 drop table if exists transaction cascade;
 
 drop table if exists public.user cascade;
+
+drop table if exists voucher cascade;
+drop sequence if exists voucher_seq;
 
