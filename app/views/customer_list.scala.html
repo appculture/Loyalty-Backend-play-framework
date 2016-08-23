@@ -63,7 +63,7 @@
 
             @for(customer <- currentPage.getList) {
                 <tr>
-                    <td><a href="/customer/{@customer.getCustomerId}">@customer.getCustomerId</a></td>
+                    <td><a href="/customer/@customer.getCustomerId">@customer.getCustomerId</a></td>
                     <td>@customer.getFullName</td>
                     <td>@customer.getEmail</td>
                 </tr>

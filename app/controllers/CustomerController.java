@@ -1,11 +1,16 @@
 package controllers;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import models.Customer;
+import play.Logger;
+import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import utils.Strings;
 import views.html.customer_list;
 
 /**
+ * Customer operations controller.
  * Created by abozic on 8/22/16.
  */
 public class CustomerController extends Controller {
@@ -26,8 +31,17 @@ public class CustomerController extends Controller {
         );
     }
 
-    public Result getCustomer(String customerId){
-        return ok();
+    public Result getCustomer(String customerId) {
+        if (Strings.isNullOrEmpty(customerId)) return badRequest("Customer ID not valid");
+        Logger.info("Requested customerID: " + customerId);
+
+        Customer customer = Customer.find.byId(customerId);
+        if (customer == null) return badRequest("No customer found");
+
+        JsonNode result = Json.toJson(customer);
+        Logger.info("Customer found: " + result);
+
+        return ok(result);
     }
 
     public Result create() {
