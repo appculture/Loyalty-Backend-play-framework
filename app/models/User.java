@@ -5,10 +5,7 @@ import org.mindrot.jbcrypt.BCrypt;
 import play.Logger;
 import play.data.validation.Constraints;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * User of the system.
@@ -16,6 +13,7 @@ import javax.persistence.Table;
  */
 
 @Entity
+@Table(name = "user", schema = "public")
 public class User extends Model {
 
     @Column(name = "fullName")
@@ -25,6 +23,7 @@ public class User extends Model {
     private String username;
     @Constraints.Required
     private String password;
+    @Enumerated(EnumType.STRING)
     private UserType type;
 
     public String getFullName() {
@@ -68,7 +67,7 @@ public class User extends Model {
         return null;
     }
 
-    public static Model.Finder<String,User> find = new Model.Finder<>(User.class);
+    public static Model.Finder<String, User> find = new Model.Finder<>(User.class);
 
     public static User authenticate(String username, String password) {
 

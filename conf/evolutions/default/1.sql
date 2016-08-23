@@ -11,7 +11,7 @@ create table customer (
   points                        float,
   birth_date                    timestamp,
   user_id                       varchar(255),
-  creation_date                 timestamp DEFAULT now(),
+  creation_date                 timestamp default now(),
   constraint uq_customer_email unique (email),
   constraint pk_customer primary key (customer_id)
 );
@@ -22,12 +22,12 @@ create table test (
   constraint pk_test primary key (id)
 );
 
-create table user (
+create table public.user (
   username                      varchar(255) not null,
   fullname                      varchar(255),
   password                      varchar(255),
-  type                          integer,
-  constraint ck_user_type check (type in (0,1)),
+  type                          varchar(8),
+  constraint ck_user_type check (type in ('CUSTOMER','ADMIN')),
   constraint pk_user primary key (username)
 );
 
@@ -38,5 +38,5 @@ drop table if exists customer cascade;
 
 drop table if exists test cascade;
 
-drop table if exists user cascade;
+drop table if exists public.user cascade;
 

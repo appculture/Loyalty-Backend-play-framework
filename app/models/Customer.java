@@ -35,6 +35,7 @@ public class Customer extends Model {
      * User ID represent external system ID, ID might be filled during import of the data.
      */
     private String userId;
+    @Column(columnDefinition = "timestamp default now()")
     private Date creationDate;
 
     public static Finder<String, Customer> find = new Finder<>(Customer.class);
