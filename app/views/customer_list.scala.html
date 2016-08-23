@@ -1,5 +1,40 @@
 @(currentPage: Customer.Page, currentSortBy: String, currentOrder: String, currentFilter: String)
 
+@****************************************
+* Helper generating navigation links    *
+****************************************@
+@link(newPage:Int, newSortBy:String) = @{
+
+    var sortBy = currentSortBy
+    var order = currentOrder
+
+    if(newSortBy != null) {
+        sortBy = newSortBy
+        if(currentSortBy == newSortBy) {
+            if(currentOrder == "asc") {
+                order = "desc"
+            } else {
+                order = "asc"
+            }
+        } else {
+            order = "asc"
+        }
+    }
+
+    // Generate the link
+    routes.CustomerController.list(newPage, sortBy, order, currentFilter)
+
+}
+
+@**********************************
+* Helper generating table headers *
+***********************************@
+@header(key:String, title:String) = {
+    <th class="@key.replace(".","_") header @if(currentSortBy == key) @{if(currentOrder == "asc") "headerSortDown" else "headerSortUp"}">
+        <a href="@link(0, key)">@title</a>
+    </th>
+}
+
 @main("Customer list"){
 
     @if(flash.containsKey("success")) {
@@ -19,8 +54,9 @@
         <table >
             <thead>
                 <tr>
-                    <td>"Computer ID"</td>
-                    <td>"Full name"</td>
+                    <td>Customer ID</td>
+                    @header("fullName", "Full name")
+                    @header("email", "Email")
                 </tr>
             </thead>
             <tbody>
@@ -28,9 +64,8 @@
             @for(customer <- currentPage.getList) {
                 <tr>
                     <td><a href="/customer/{@customer.getCustomerId}">@customer.getCustomerId</a></td>
-                    <td>
-                    @customer.getFullName
-                    </td>
+                    <td>@customer.getFullName</td>
+                    <td>@customer.getEmail</td>
                 </tr>
             }
 
