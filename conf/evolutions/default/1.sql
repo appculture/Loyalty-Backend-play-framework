@@ -11,7 +11,7 @@ create table customer (
   points                        float,
   birth_date                    timestamp,
   user_id                       varchar(255),
-  creation_date                 timestamp,
+  creation_date                 timestamp DEFAULT now(),
   constraint uq_customer_email unique (email),
   constraint pk_customer primary key (customer_id)
 );
