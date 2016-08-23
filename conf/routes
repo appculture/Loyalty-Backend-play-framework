@@ -8,6 +8,9 @@ GET     /                           controllers.HomeController.index
 GET     /count                      controllers.CountController.count
 # An example controller showing how to write asynchronous code
 GET     /message                    controllers.AsyncController.message
+# An example controller for listing customers
+#GET         /customer                  controllers.CustomerController.index
+# Sample routes end
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
@@ -23,3 +26,12 @@ POST    /login                      controllers.LoginController.authenticate()
 
 GET     /logout                     controllers.LoginController.logout()
 #Login end
+
+# Customer start
+# List all customers page
+GET         /customer               controllers.CustomerController.list(page:Int ?= 0, sortBy ?= "name", orderBy ?= "asc", filter ?= "")
+# Create customer page
+GET         /customer/create        controllers.CustomerController.create
+# Get customer by customerId
+GET         /customer/:customerId   controllers.CustomerController.getCustomer(customerId : String)
+# Customer end

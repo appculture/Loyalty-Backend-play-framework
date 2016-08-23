@@ -16,7 +16,6 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name = "user", schema = "public")
 public class User extends Model {
 
     @Column(name = "fullName")

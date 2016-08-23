@@ -1,21 +1,15 @@
 package controllers;
 
 import models.Test;
-
 import models.User;
 import play.Logger;
 import play.db.Database;
 import play.mvc.Controller;
 import play.mvc.Result;
-
 import play.mvc.Security;
 import views.html.getAllTestData;
-import views.html.sampledb;
 
 import javax.inject.Inject;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.List;
 
 public class SampleDBController extends Controller {
@@ -42,23 +36,6 @@ public class SampleDBController extends Controller {
 
     public Result getName()
     {
-        String name = "";
-        try {
-
-            Connection conn = db.getConnection();
-            ResultSet rs;
-            PreparedStatement ps = conn.prepareStatement("select name from test where id=? limit 1");
-            ps.setInt(1,5);
-            rs = ps.executeQuery();
-            while (rs.next() ) {
-                name = rs.getString("name");
-            }
-
-            conn.close();
-            return ok(sampledb.render(name));
-        } catch (Exception e) {
-            Logger.error("Error:" + e.getMessage());
-        }
 
 
         return ok();
