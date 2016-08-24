@@ -35,3 +35,10 @@ GET         /customer/create        controllers.CustomerController.create
 # Get customer by customerId
 GET         /customer/:customerId   controllers.CustomerController.getCustomer(customerId : String)
 # Customer end
+
+# DashboardController start
+GET         /dashboard              controllers.DashboardController.index()
+
+GET         /vouchers               controllers.VouchersController.index()
+
+GET         /settings               controllers.SettingsController.index()
