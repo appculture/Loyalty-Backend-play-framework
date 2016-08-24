@@ -39,6 +39,6 @@ GET         /customer/:customerId   controllers.CustomerController.getCustomer(c
 # DashboardController start
 GET         /dashboard              controllers.DashboardController.index()
 
-GET         /vouchers               controllers.VouchersController.index()
+GET         /voucher               controllers.VoucherController.index()
 
 GET         /settings               controllers.SettingsController.index()

@@ -5,6 +5,8 @@ import models.Configuration;
 import javax.inject.Singleton;
 
 /**
+ * ServerConfiguration loaded from database.
+ *
  * Created by abozic on 8/24/16.
  */
 @Singleton

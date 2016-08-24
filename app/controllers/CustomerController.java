@@ -7,6 +7,7 @@ import play.Logger;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import utils.Constants;
 import utils.Strings;
 import views.html.customer_list;
 
@@ -26,7 +27,7 @@ public class CustomerController extends Controller {
     public Result list(int page, String sortBy, String order, String filter) {
         return ok(
                 customer_list.render(
-                        Customer.page(page, 10, sortBy, order, filter),
+                        Customer.page(page, Constants.DEFAULT_PAGE_SIZE, sortBy, order, filter),
                         sortBy, order, filter
                 )
         );
