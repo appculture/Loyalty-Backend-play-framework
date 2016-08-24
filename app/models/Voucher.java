@@ -1,6 +1,7 @@
 package models;
 
 import com.avaje.ebean.Model;
+import play.data.validation.Constraints;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -13,18 +14,22 @@ import java.util.List;
  */
 @Entity
 @SequenceGenerator(name = "voucher_seq", sequenceName = "voucher_seq")
-public class Voucher {
+public class Voucher extends Model {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "voucher_seq")
+    @Constraints.Required
     private int voucherId;
+    @Constraints.Required
     private String name;
     private String description;
     private String imageUrl;
+    @Constraints.Required
     private double points;
     private boolean active;
     @Column(columnDefinition = "timestamp default now()")
     private Date creationDate;
+    @Constraints.Required
     private Date expiryDate;
 
     public int getVoucherId() {
@@ -91,7 +96,7 @@ public class Voucher {
         this.expiryDate = expiryDate;
     }
 
-    public static Model.Finder<String, Voucher> find = new Model.Finder<>(Voucher.class);
+    public static Model.Finder<Integer, Voucher> find = new Model.Finder<>(Voucher.class);
 
     public static Page page(int page, int pageSize, String sortBy, String order, String filter) {
         if (page < 1) page = 1;

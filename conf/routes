@@ -39,6 +39,13 @@ GET         /customer/:customerId   controllers.CustomerController.getCustomer(c
 # DashboardController start
 GET         /dashboard              controllers.DashboardController.index()
 
+# Voucher list
 GET         /voucher               controllers.VoucherController.index()
+
+POST        /voucher                controllers.VoucherController.save()
+
+GET         /voucher/new            controllers.VoucherController.newVoucher()
+
+GET         /voucher/:voucherId     controllers.VoucherController.edit(voucherId : Int)
 
 GET         /settings               controllers.SettingsController.index()
