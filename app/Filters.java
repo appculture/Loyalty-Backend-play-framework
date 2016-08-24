@@ -22,7 +22,7 @@ public class Filters implements HttpFilters {
     private final EssentialFilter exampleFilter;
 
     /**
-     * @param env Basic environment settings for the current application.
+     * @param env Basic environment settings_page for the current application.
      * @param exampleFilter A demonstration filter that adds a header to
      */
     @Inject

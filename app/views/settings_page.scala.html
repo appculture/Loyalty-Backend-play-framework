@@ -1,0 +1,46 @@
+@(user: User, settingsForm: Form[Configuration])
+
+<html>
+    <head>
+        <title>Settings</title>
+    </head>
+
+    <style>
+    .input-w label {
+        display: inline-block;
+        float: left!important;
+    }
+
+    .input-w input {
+        display: inline-block;
+        float: right !important;
+    }
+
+    </style>
+
+
+    <body>
+        @header(user)
+
+        @tabs()
+
+    <div align="center" style="margin-top: 50px">
+    @helper.form(action = routes.SettingsController.submitConfiguration()) {
+        <h1>Configuration</h1>
+
+        <fieldset>
+
+            @helper.inputText(settingsForm("currency"), '_label -> "Currency", '_help -> "")
+            @helper.inputText(settingsForm("bonusPointsRatio"), '_label -> "Ratio", '_help -> "")
+            @helper.checkbox(settingsForm("confirmPurchase"), '_label -> "Confirm Purchase", '_help -> "")
+
+        </fieldset>
+
+        <p>
+            <button type="submit">Save</button>
+        </p>
+        </div>
+    }
+
+    </body>
+</html>
