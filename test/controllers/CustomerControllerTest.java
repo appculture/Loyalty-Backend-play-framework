@@ -1,5 +1,6 @@
 package controllers;
 
+import models.Customer;
 import org.junit.Test;
 import play.Application;
 import play.inject.guice.GuiceApplicationBuilder;
@@ -28,6 +29,14 @@ public class CustomerControllerTest extends WithApplication {
 //        assertEquals("application/json", result.contentType().get());
 //        assertEquals("utf-8", result.charset().get());
         assertTrue(Helpers.contentAsString(result).contains("Test User 5"));
+    }
+
+    @Test
+    public void getCustomerByPropertyTest() throws Exception {
+        Customer customer = new CustomerController().getCustomerByProperty("email", "test.user1@sample.com");
+
+        assertNotNull(customer);
+        assertEquals("Test User 1", customer.getFullName());
     }
 
     /*
