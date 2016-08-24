@@ -3,10 +3,7 @@ package models;
 import com.avaje.ebean.Model;
 import play.data.format.Formats;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
@@ -37,6 +34,10 @@ public class Customer extends Model {
     private String userId;
     @Column(columnDefinition = "timestamp default now()")
     private Date creationDate;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
+    private List<Transaction> transactions;
+
+    /////// END of field listing
 
     public static Finder<String, Customer> find = new Finder<>(Customer.class);
 
@@ -184,5 +185,13 @@ public class Customer extends Model {
 
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
     }
 }

@@ -1,15 +1,25 @@
 package models;
 
+import com.avaje.ebean.Model;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  * Configuration represent system default configuration.
  * <p>
  * Created by abozic on 8/18/16.
  */
-public class Configuration {
+@Entity
+public class Configuration extends Model {
 
+    @Id
+    private int id = 1;
     private String currency;
-    private double bonusPointsRation;
+    private double bonusPointsRatio;
     private boolean confirmPurchase;
+
+    public static Model.Finder<Integer, Configuration> find = new Model.Finder<>(Configuration.class);
 
     public String getCurrency() {
         return currency;
@@ -19,12 +29,12 @@ public class Configuration {
         this.currency = currency;
     }
 
-    public double getBonusPointsRation() {
-        return bonusPointsRation;
+    public double getBonusPointsRatio() {
+        return bonusPointsRatio;
     }
 
-    public void setBonusPointsRation(double bonusPointsRation) {
-        this.bonusPointsRation = bonusPointsRation;
+    public void setBonusPointsRatio(double bonusPointsRatio) {
+        this.bonusPointsRatio = bonusPointsRatio;
     }
 
     public boolean isConfirmPurchase() {
