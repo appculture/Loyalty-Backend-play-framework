@@ -7,7 +7,7 @@ import play.db.Database;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
-import views.html.getAllTestData;
+import views.html.list_test_data;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -31,7 +31,7 @@ public class SampleDBController extends Controller {
         //Logger.debug("name of first entry in db:" + firstTest.name);
 
         //return ok(sampledb.render("Database sample page."));
-        return ok(getAllTestData.render(Test.find.all(), User.find.byId(request().username())));
+        return ok(list_test_data.render(Test.find.all(), User.find.byId(request().username())));
     }
 
     public Result getName()

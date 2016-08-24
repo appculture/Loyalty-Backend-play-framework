@@ -1,4 +1,5 @@
-@(tests: List[Test], user: User)
+@import java.util
+@(tests: util.List[Test], user: User)
 
 @main("Welcome to Play") {
     <header>
@@ -19,18 +20,13 @@
             </dl>
         </header>
         @*<table>*@
-            @*<tr>*@
-                @*<th>id</th>*@
-                @*<th>name</th>*@
-            @*</tr>*@
-            @*@for(test <- tests) {*@
-                @*<tr>*@
-                    @*<td>@test.id</td>*@
-                    @*<td>@test.name</td>*@
-                @*</tr>*@
-            @*}*@
+        @*<tr>*@
+        @*<th>id</th>*@
+        @*<th>name</th>*@
+        @*</tr>*@
         @*</table>*@
 
         @*<h1>Size of tests list is: @tests.size()</h1>*@
     </body>
 }
+

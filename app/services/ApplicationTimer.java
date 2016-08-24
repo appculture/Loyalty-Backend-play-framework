@@ -4,6 +4,8 @@ import java.time.Clock;
 import java.time.Instant;
 import java.util.concurrent.CompletableFuture;
 import javax.inject.*;
+
+import com.google.inject.Module;
 import play.Logger;
 import play.inject.ApplicationLifecycle;
 
