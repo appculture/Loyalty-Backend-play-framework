@@ -49,3 +49,5 @@ GET         /voucher/new            controllers.VoucherController.newVoucher()
 GET         /voucher/:voucherId     controllers.VoucherController.edit(voucherId : Int)
 
 GET         /settings               controllers.SettingsController.index()
+
+POST        /settings               controllers.SettingsController.submitConfiguration()
