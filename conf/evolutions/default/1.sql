@@ -3,6 +3,14 @@
 
 # --- !Ups
 
+create table configuration (
+  id                            serial not null,
+  currency                      varchar(255),
+  bonus_points_ratio            float,
+  confirm_purchase              boolean,
+  constraint pk_configuration primary key (id)
+);
+
 create table customer (
   customer_id                   varchar(255) not null,
   full_name                     varchar(255) not null,
@@ -63,6 +71,8 @@ create index ix_transaction_customer_customer_id on transaction (customer_custom
 
 alter table if exists transaction drop constraint if exists fk_transaction_customer_customer_id;
 drop index if exists ix_transaction_customer_customer_id;
+
+drop table if exists configuration cascade;
 
 drop table if exists customer cascade;
 

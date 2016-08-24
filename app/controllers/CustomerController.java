@@ -40,6 +40,10 @@ public class CustomerController extends Controller {
         return ok(result);
     }
 
+    public Customer getCustomerByProperty(String propertyName, Object value) {
+        return Customer.find.where().eq(propertyName, value).findUnique();
+    }
+
     private Customer getCustomerById(String customerId) {
         if (Strings.isNullOrEmpty(customerId)) return null;
         Logger.info("Requested customerID: " + customerId);
