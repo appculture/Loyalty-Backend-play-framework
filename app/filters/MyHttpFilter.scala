@@ -1,7 +1,7 @@
-package controllers
+package filters
 
 import akka.actor.ActorSystem
-import akka.stream.{ActorMaterializer, Materializer}
+import akka.stream.ActorMaterializer
 import play.api.http.HttpFilters
 import play.api.libs.concurrent.Execution.Implicits.defaultContext
 import play.api.mvc._

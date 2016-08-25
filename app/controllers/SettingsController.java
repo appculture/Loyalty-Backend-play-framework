@@ -40,9 +40,10 @@ public class SettingsController extends Controller {
     @Security.Authenticated(Secured.class)
     public Result submitConfiguration() {
         Form<Configuration> settingsForm = formFactory.form(Configuration.class).bindFromRequest();
-        //String confirmPurchase = formFactory.form(Configuration.class).field("currency").value();
 
-        //Logger.debug("confirmPurchase submit:" + confirmPurchase);
+        Configuration configuration = settingsForm.get();
+        configuration.setConfirmPurchase(settingsForm.field("confirmPurchase").value().equals("true"));
+
         settingsForm.get().update();
         //flash("success", "Configuration has been ");
 
