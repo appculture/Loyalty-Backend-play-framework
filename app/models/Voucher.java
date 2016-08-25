@@ -1,7 +1,11 @@
 package models;
 
+import com.avaje.ebean.Model;
+import play.data.validation.Constraints;
+
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Voucher could be used in order to spend points {@link Customer} earned in exchange for some benefits during purchase.
@@ -10,18 +14,22 @@ import java.util.Date;
  */
 @Entity
 @SequenceGenerator(name = "voucher_seq", sequenceName = "voucher_seq")
-public class Voucher {
+public class Voucher extends Model {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "voucher_seq")
+    @Constraints.Required
     private int voucherId;
+    @Constraints.Required
     private String name;
     private String description;
     private String imageUrl;
+    @Constraints.Required
     private double points;
     private boolean active;
     @Column(columnDefinition = "timestamp default now()")
     private Date creationDate;
+    @Constraints.Required
     private Date expiryDate;
 
     public int getVoucherId() {
@@ -86,5 +94,55 @@ public class Voucher {
 
     public void setExpiryDate(Date expiryDate) {
         this.expiryDate = expiryDate;
+    }
+
+    public static Model.Finder<Integer, Voucher> find = new Model.Finder<>(Voucher.class);
+
+    public static Page page(int page, int pageSize, String sortBy, String order, String filter) {
+        if (page < 1) page = 1;
+        List<Voucher> data = Voucher.find.all();
+        long total = data.size();
+        return new Page(data, total, page, pageSize);
+    }
+
+    public static class Page {
+        private final int pageSize;
+        private final long totalRowCount;
+        private final int pageIndex;
+        private final List<Voucher> list;
+
+        public Page(List<Voucher> data, long total, int page, int pageSize) {
+            this.list = data;
+            this.totalRowCount = total;
+            this.pageIndex = page;
+            this.pageSize = pageSize;
+        }
+
+        public long getTotalRowCount() {
+            return totalRowCount;
+        }
+
+        public int getPageIndex() {
+            return pageIndex;
+        }
+
+        public List<Voucher> getList() {
+            return list;
+        }
+
+        public boolean hasPrev() {
+            return pageIndex > 1;
+        }
+
+        public boolean hasNext() {
+            return (totalRowCount / pageSize) >= pageIndex;
+        }
+
+        public String getDisplayXtoYofZ() {
+            int start = ((pageIndex - 1) * pageSize + 1);
+            int end = start + Math.min(pageSize, list.size()) - 1;
+            return start + " to " + end + " of " + totalRowCount;
+        }
+
     }
 }

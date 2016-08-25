@@ -1,0 +1,29 @@
+@(voucherForm: Form[Voucher])
+
+
+@main("Edit") {
+
+    @helper.form(action = routes.VoucherController.save(), 'id -> "form") {
+
+        <h1>Voucher details</h1>
+
+        <fieldset>
+
+            <div>
+                @helper.inputText(voucherForm("name"), '_label -> "Name", 'placeholder -> "Voucher name")
+                @helper.input(voucherForm("description"), '_label -> "Description", 'placeholder -> "Voucher description") { (id, name, value, args) =>
+                    <input type="text" name="@name" value="@value" id="@id" @toHtmlArgs(args)>
+                }
+                @helper.inputText(voucherForm("points"), '_label -> "Points required")
+                @helper.checkbox(voucherForm("active"), '_label -> "Voucher active?")
+                @helper.inputDate(voucherForm("expiryDate"), 'label -> "Expiry date")
+            </div>
+        </fieldset>
+
+        <div >
+            <input type="submit" class="btn primary" value="Save">
+            <a href="@routes.VoucherController.index" class="btn">Cancel</a>
+        </div>
+    }
+
+}

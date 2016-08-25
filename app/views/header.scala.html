@@ -1,0 +1,21 @@
+@(user: User)
+<html>
+    <head>
+        <title>Settings</title>
+    </head>
+
+    <body>
+        @main("Dashboard") {
+            <header>
+                <a href="/" id="logo"><span>Loyalty </span>Backend</a>
+                <dl id="user">
+                    <dt>@user.getFullName <span>(@user.getUsername)</span></dt>
+                    <dd>
+                        <a href="@routes.LoginController.logout()">Logout</a>
+                    </dd>
+                </dl>
+            </header>
+        }
+    </body>
+
+</html>
