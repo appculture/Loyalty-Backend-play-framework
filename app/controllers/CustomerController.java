@@ -2,10 +2,14 @@ package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import models.Customer;
+
+import models.User;
 import play.Logger;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
+import utils.Constants;
 import utils.Strings;
 import views.html.customer_list;
 
@@ -18,17 +22,19 @@ public class CustomerController extends Controller {
     /**
      * Handle default path requests, redirect to computers list
      */
+    @Security.Authenticated(Secured.class)
     public Result index() {
         return redirect("/customer");
     }
 
+    @Security.Authenticated(Secured.class)
     public Result list(int page, String sortBy, String order, String filter) {
         return ok(
                 customer_list.render(
-                        Customer.page(page, 10, sortBy, order, filter),
-                        sortBy, order, filter
+                        Customer.page(page, Constants.DEFAULT_PAGE_SIZE, sortBy, order, filter),
+                        sortBy, order, filter, User.find.byId(request().username()
                 )
-        );
+        ));
     }
 
     public Result getCustomer(String customerId) {

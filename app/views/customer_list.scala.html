@@ -1,4 +1,4 @@
-@(currentPage: Customer.Page, currentSortBy: String, currentOrder: String, currentFilter: String)
+@(currentPage: Customer.Page, currentSortBy: String, currentOrder: String, currentFilter: String, user: User)
 
 @****************************************
 * Helper generating navigation links    *
@@ -36,6 +36,10 @@
 }
 
 @main("Customer list"){
+
+    @main_header(user)
+
+    @tabs()
 
     @if(flash.containsKey("success")) {
         <div class="alert-message warning">
