@@ -1,5 +1,6 @@
 package controllers;
 
+import models.User;
 import models.Voucher;
 import play.Logger;
 import play.data.Form;
@@ -7,6 +8,7 @@ import play.data.FormFactory;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 import utils.Constants;
 import views.html.voucher.edit;
 import views.html.voucher.summary;
@@ -23,12 +25,14 @@ public class VoucherController extends Controller {
         this.formFactory = formFactory;
     }
 
+    @Security.Authenticated(Secured.class)
     public Result index() {
         return list(0, "asc", "name", null);
     }
 
+    @Security.Authenticated(Secured.class)
     public Result list(int page, String sortBy, String order, String filter) {
-        return ok(summary.render(Voucher.page(page, Constants.DEFAULT_PAGE_SIZE, null, null, null), sortBy, order, filter));
+        return ok(summary.render(Voucher.page(page, Constants.DEFAULT_PAGE_SIZE, null, null, null), sortBy, order, filter, User.find.byId(request().username())));
     }
 
     public Result newVoucher() {

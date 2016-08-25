@@ -1,4 +1,4 @@
-@(currentPage: Voucher.Page, currentSortBy: String, currentOrder: String, currentFilter: String)
+@(currentPage: Voucher.Page, currentSortBy: String, currentOrder: String, currentFilter: String, user: User)
 @**********************************
 * Helper generating table headers *
 ***********************************@
@@ -37,6 +37,11 @@
 }
 
 @main("Vouchers") {
+
+
+    @main_header(user)
+
+    @tabs()
 
     @if(flash.containsKey("success")) {
         <div class="alert-message warning">
