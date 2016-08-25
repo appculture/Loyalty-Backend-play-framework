@@ -1,3 +1,5 @@
+package filters;
+
 import javax.inject.*;
 import play.*;
 import play.mvc.EssentialFilter;
