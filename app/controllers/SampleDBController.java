@@ -3,22 +3,18 @@ package controllers;
 import models.Test;
 import models.User;
 import play.Logger;
-import play.db.Database;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
 import views.html.getAllTestData;
 
-import javax.inject.Inject;
 import java.util.List;
 
 public class SampleDBController extends Controller {
 
-    private Database db;
 
-    @Inject
-    public SampleDBController(Database db) {
-        this.db = db;
+    public SampleDBController() {
+
     }
 
     @Security.Authenticated(Secured.class)
